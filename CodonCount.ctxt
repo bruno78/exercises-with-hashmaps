@@ -10,4 +10,6 @@ comment4.params=start\ end
 comment4.target=void\ printCodonCounts(int,\ int)
 comment5.params=
 comment5.target=void\ tester()
-numComments=6
+comment6.params=
+comment6.target=void\ examTest()
+numComments=7

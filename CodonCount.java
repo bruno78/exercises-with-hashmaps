@@ -79,4 +79,18 @@ public class CodonCount
             }
         }
     }
+    
+    public void examTest(){
+        FileResource fr = new FileResource();
+        for (String dna : fr.lines()){
+            dna = dna.toUpperCase();
+            int frame = 2;
+            buildCodonMap(frame, dna);
+            System.out.println("Reading frame starting with " + frame +
+                        " results in " + dnaMap.size() + " unique codons\n" +
+                        "and most common codon is " + getMostCommonCodon() +
+                        " with count " + dnaMap.get(getMostCommonCodon()));
+            printCodonCounts(4, 4);
+        }
+    }
 }

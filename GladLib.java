@@ -5,18 +5,20 @@ public class GladLib {
     private HashMap<String, ArrayList> myMap;
     
     private ArrayList<String> usedWords;
+    private HashMap<String, ArrayList> wordsConsidered;
     private int count;
     
     private Random myRandom;
     
     private static String dataSourceURL = "http://dukelearntoprogram.com/course3/data";
-    private static String dataSourceDirectory = "data";
+    private static String dataSourceDirectory = "data2";
     
     public GladLib(){
         myMap = new HashMap<String, ArrayList>();
         initializeFromSource(dataSourceDirectory);
         myRandom = new Random();
         usedWords = new ArrayList<String>();
+        wordsConsidered = new HashMap<String, ArrayList>();
         count = 0;
     }
     
@@ -40,12 +42,25 @@ public class GladLib {
         return source.get(index);
     }
     
+    private void wordsConsideredBuilder(String label, String word){
+        if(!wordsConsidered.containsKey(label)){
+             ArrayList<String> list = new ArrayList<String>();
+             list.add(word);
+             wordsConsidered.put(label, list);
+        }
+        else {
+             wordsConsidered.get(label).add(word);
+        }
+    }
+    
     private String getSubstitute(String label) {
         if (label.equals("number")){
             return ""+myRandom.nextInt(50)+5;
         }
         if (myMap.containsKey(label)) {
-            return randomFrom(myMap.get(label));
+            String word = randomFrom(myMap.get(label));
+            wordsConsideredBuilder(label, word);
+            return word;
         }
         return "**UNKNOWN**";
     }
@@ -116,17 +131,33 @@ public class GladLib {
         return list;
     }
     
+    public int totalWordsInMap(){
+        int total = 0;
+        for (String category : myMap.keySet()){
+            total += myMap.get(category).size();
+        }
+        return total;
+    }
+    
+    public int totalWordsConsidered(){
+        int total = 0;
+        for (String label : wordsConsidered.keySet()){
+            total += wordsConsidered.get(label).size();
+        }
+        return total;
+    }
+    
     public void makeStory(){
         usedWords.clear();
+        wordsConsidered.clear();
         count = 0;
         System.out.println("\n");
-        String story = fromTemplate("datalong/madtemplate2.txt");
+        String story = fromTemplate("data2/madtemplate2.txt");
         printOut(story, 60);
         System.out.println("\n");
         System.out.println("The total number of words that were replaced" +
                              " right after the story is printed: " + count);
+        System.out.println("\nTotal of words considered " + totalWordsConsidered());
     }
-    
-
 
 }

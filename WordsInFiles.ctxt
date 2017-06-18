@@ -12,4 +12,6 @@ comment5.params=word
 comment5.target=void\ printFilesIn(java.lang.String)
 comment6.params=
 comment6.target=void\ tester()
-numComments=7
+comment7.params=
+comment7.target=void\ examTest()
+numComments=8

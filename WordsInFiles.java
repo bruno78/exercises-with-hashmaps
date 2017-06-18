@@ -96,5 +96,29 @@ public class WordsInFiles
             printFilesIn(wordsWithMax.get(k));
         }
         
+        int occurrence = 5;
+        int count = 0;
+        for (String word : wordMap.keySet()){
+            if(wordMap.get(word).size() == occurrence){
+                count ++;
+            }
+        }
+        System.out.println(count);
+    }
+    
+    public void examTest(){
+        
+        buildWordFileMap();
+        int occurrence = 4;
+        int count = 0;
+        for (String word : wordMap.keySet()){
+            if(wordMap.get(word).size() == occurrence){
+                count ++;
+            }
+        }
+        System.out.println(count);
+        printFilesIn("sad");
+        System.out.println("");
+        printFilesIn("red");
     }
 }
